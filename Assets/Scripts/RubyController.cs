@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEditor;
 using UnityEngine;
 
@@ -17,7 +18,10 @@ public class RubyController : MonoBehaviour
     public bool invincible;
     public float maxInvincibleTime = 2;
     private float _invincibleTimer;
+    private bool _launching = false;
     private Vector2 _lookDirection = new Vector2(0, 0);
+    public float maxLaunchInterval = 1;
+    private float _launchIntervalTimer = 0.0f;
     public GameObject projectilePrefab;
     private static readonly int Launch1 = Animator.StringToHash("Launch");
     private static readonly int Property = Animator.StringToHash("Look X");
@@ -48,22 +52,28 @@ public class RubyController : MonoBehaviour
         // 无敌的处理
         if (invincible)
         {
-            _invincibleTimer -= Time.deltaTime;  //deltaTime 为上一帧到下一帧的间隔  故时间的变动写在Update 内
+            _invincibleTimer -= Time.deltaTime; //deltaTime 为上一帧到下一帧的间隔  故时间的变动写在Update 内
             // Debug.Log($"{_invincibleTimer}");
         }
+
         if (_invincibleTimer < 0)
         {
             invincible = false;
         }
-        
-        // 发射
-        if (Input.GetKeyDown(KeyCode.C))
+
+        if (_launchIntervalTimer > 0)
         {
+            _launchIntervalTimer -= Time.deltaTime;
+        }
+        else if(Input.GetKeyDown(KeyCode.C) || Input.GetAxis("Fire1") != 0)
+        {
+            // 发射 间隔1s
             Debug.Log("Ruby 正在发射飞弹！");
             Launch();
+            _launchIntervalTimer = maxLaunchInterval;
         }
-    } 
-    
+    }
+
     // 固定更新方法，和物理相关的操作代码，都要写在此方法中。
     // 固定更新的时间是0.02s，1秒执行50次，可在Edit--->Project Settings--->Time面板中的Fixed Timestep 查看。
     private void FixedUpdate()
@@ -85,17 +95,18 @@ public class RubyController : MonoBehaviour
         _animator.SetFloat(Property, _lookDirection.x);
         _animator.SetFloat(Property1, _lookDirection.y);
         _animator.SetFloat(Speed, move.magnitude);
-        
-        // 获取对象位置 向量 进行移动
-        var objPosition = _rigidbody2D.position;
-        // objPosition.x -= 0.1f;
-        objPosition.x += speed * _horizontal * Time.deltaTime;  // Time.deltaTime 为一帧的运行时间  
-        objPosition.y += speed * _vertical * Time.deltaTime;
-        // 更新对象位置到新的位置
-        // transform.position = objPosition;
-        _rigidbody2D.position = objPosition;
-        
 
+        if (!_launching)
+        {
+            // 获取对象位置 向量 进行移动
+            var objPosition = _rigidbody2D.position;
+            // objPosition.x -= 0.1f;
+            objPosition.x += speed * _horizontal * Time.deltaTime; // Time.deltaTime 为一帧的运行时间  
+            objPosition.y += speed * _vertical * Time.deltaTime;
+            // 更新对象位置到新的位置
+            // transform.position = objPosition;
+            _rigidbody2D.position = objPosition;
+        }
     }
     
     // 改变生命值
@@ -117,7 +128,9 @@ public class RubyController : MonoBehaviour
     private void Launch()
     {
         // Quaternion.identity 表示“无旋转”
-        var projectileObject = Instantiate(projectilePrefab, _rigidbody2D.position + Vector2.up * 0.5f, Quaternion.identity);
+        var projectileObject = Instantiate(projectilePrefab, 
+            _rigidbody2D.position + Vector2.up * 0.5f,
+            Quaternion.identity);  // 初始化对象
         var projectile = projectileObject.GetComponent<Projectile>();
         projectile.Launch(director: _lookDirection, force: 500);
         _animator.SetTrigger(Launch1);

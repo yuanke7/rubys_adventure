@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Projectile : MonoBehaviour
 {
@@ -30,6 +31,11 @@ public class Projectile : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        // 或者距离过大时销毁
+        if (transform.position.magnitude > 100.0f)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void Launch(Vector2 director, float force)
@@ -39,12 +45,17 @@ public class Projectile : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D col)
     {
+        
         Debug.Log($"齿轮击中了目标:{col.gameObject.name}");
-        Destroy(gameObject);  // 销毁当前组件所在的游戏对象(飞弹本身)
+        if (col.collider.GetComponent<Tilemap>() == null)  // 碰到的不为tile map 则销毁
+        {
+            Destroy(gameObject);  // 销毁当前组件所在的游戏对象(飞弹本身)
+        }
         var obj = col.collider.GetComponent<EnemyController>();
         if (obj != null)
         {
-            Destroy(col.gameObject); // 销毁击中的目标    
+            obj.Fix();
+            // Destroy(col.gameObject); // 销毁击中的目标    
         }
     }
 }

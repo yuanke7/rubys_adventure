@@ -8,7 +8,7 @@ public class HealthCollectible : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D obj)
     {
-        Debug.Log($"Object <{obj}> has enter the area.");
+        Debug.Log($"Object <{obj.name}> has enter the HealthCollectible area.");
         var controller = obj.GetComponent<RubyController>();
         if (controller == null) return;
         Debug.Log(controller.Health);

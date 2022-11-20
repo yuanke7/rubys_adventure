@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1582232390295891438}
   - component: {fileID: 8739273610195107643}
   - component: {fileID: 2128499830045453341}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: robot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4520837074058069957
 SpriteRenderer:
@@ -121,11 +121,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  vertical: 1
-  maxMoveTime: 2
+  vertical: 0
+  maxMoveTime: 3
   moveTimer: 0
   direction: 1
   damageToPlayer: 1
+  broken: 1
 --- !u!61 &8739273610195107643
 BoxCollider2D:
   m_ObjectHideFlags: 0
