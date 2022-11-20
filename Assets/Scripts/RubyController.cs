@@ -104,7 +104,7 @@ public class RubyController : MonoBehaviour
         }
     }
     
-    // 改变生命值
+    // 改变生命值 
     public void ChangeHealth(int amount)
     {
         if (amount < 0)
