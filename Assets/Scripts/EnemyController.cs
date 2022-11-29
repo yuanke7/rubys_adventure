@@ -16,6 +16,10 @@ public class EnemyController : MonoBehaviour
     public int damageToPlayer = 1;
     public bool broken = true;
     public float attackArea = 5.0f;
+    private Vector2 _stuckedPosition;
+    private bool _stucked = false;
+    public float maxStuckedTime = 2.0f;
+    private float _stuckedTimer; 
     private Rigidbody2D _rigidbody2D;
     private Animator _animator;
     Random ran = new Random();
@@ -34,7 +38,7 @@ public class EnemyController : MonoBehaviour
         moveTimer -= Time.deltaTime;
         if (moveTimer > 0) return;
         vertical = ran.Next(0,2) == 1;  // 实现随机垂直或水平移动
-        Debug.Log(vertical);
+        // Debug.Log(vertical);
         direction = -direction;
         moveTimer = maxMoveTime;
     }
@@ -42,8 +46,38 @@ public class EnemyController : MonoBehaviour
     private void FixedUpdate()
     {
         if (!broken){return;}  // 修复后停止移动
-        var position = _rigidbody2D.position;
-        FollowPlayer(position);
+        var position = _rigidbody2D.position;  // 当前位置
+
+        if (_stuckedTimer <= 0)
+        {
+            // 在寻路过程中遇到障碍物则调整
+            if (_stuckedPosition.normalized == position.normalized)
+            {   // direction
+                // up [true 1]   down [true -1]   left [false -1]  right [false 1] 
+                Debug.Log($"{position.normalized} {_stuckedPosition.normalized}");
+                vertical = !vertical;
+                _stucked = true;
+                _stuckedTimer = maxStuckedTime;
+            }
+            else
+            {
+                _stucked = false;
+            }
+        }
+        else
+        {
+            _stuckedTimer-= Time.deltaTime;
+        }
+
+        _stuckedPosition = position;
+        
+        // 跟随玩家
+        if (!_stucked)
+        {
+            FollowPlayer(position);
+        }
+        
+        // 行走
         if (vertical)
         {
             _animator.SetFloat("MoveX", 0);
@@ -56,8 +90,8 @@ public class EnemyController : MonoBehaviour
             _animator.SetFloat("MoveY", 0);
             position.x += Time.deltaTime * speed * direction;
         }
-        // _rigidbody2D.MovePosition(position); // 如果使用这一行  玩家碰到机器人后会被推开且持续移动
-        _rigidbody2D.position = position; // 这一行则不会， 尽量使用这种移动方式
+        _rigidbody2D.MovePosition(position); // 这一行不会
+        // _rigidbody2D.position = position; // 如果使用这一行  玩家碰到机器人后会被推开且持续移动
     }
 
     private void OnCollisionEnter2D(Collision2D obj)
@@ -68,10 +102,19 @@ public class EnemyController : MonoBehaviour
         {
             player.ChangeHealth(-damageToPlayer);
         }
-        // 撞击到不可穿越物体立刻回头
+        // 撞击到不可穿越物体则回头
         if (tilemap)
         {
             direction = -direction;
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        var player = collision.gameObject.GetComponent<RubyController>();
+        if (player)
+        {
+            player.ChangeHealth(-damageToPlayer);
         }
     }
 
@@ -86,11 +129,14 @@ public class EnemyController : MonoBehaviour
     public void FollowPlayer(Vector2 position)
     {
         var player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null){return;}
         var playerPosition = player.gameObject.GetComponent<Rigidbody2D>().position;
         var distanceX = position.x - playerPosition.x;
         var distanceY = position.y - playerPosition.y;
         var distance = Vector2.Distance(position, playerPosition);
-        if (distance>attackArea){return;}
+        if (distance>attackArea){return;}   // 控制机器人警觉范围
+        
+        // 根据玩家位置改变机器人行进方向 在没有卡住的情况下
         if (Mathf.Abs(distanceX) > Math.Abs(distanceY))
         {
             vertical = false;

@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class RubyController : MonoBehaviour
@@ -11,7 +12,7 @@ public class RubyController : MonoBehaviour
     // obj property
     public int maxHealth = 10;
     public bool invincible;
-    public float maxInvincibleTime = 2;
+    public float maxInvincibleTime = 0.2f;
     private float _invincibleTimer;
     private bool _launching = false;
     private Vector2 _lookDirection = new Vector2(0, 0);
@@ -73,6 +74,10 @@ public class RubyController : MonoBehaviour
     // 固定更新的时间是0.02s，1秒执行50次，可在Edit--->Project Settings--->Time面板中的Fixed Timestep 查看。
     private void FixedUpdate()
     {
+        if (Health == 0)
+        {
+            Destroy(gameObject);
+        }
         // 获取输入的方向x,y
         _horizontal = Input.GetAxis("Horizontal");
         _vertical = Input.GetAxis("Vertical");
@@ -100,7 +105,8 @@ public class RubyController : MonoBehaviour
             objPosition.y += speed * _vertical * Time.deltaTime;
             // 更新对象位置到新的位置
             // transform.position = objPosition;
-            _rigidbody2D.position = objPosition;
+            // _rigidbody2D.position = objPosition;
+            _rigidbody2D.MovePosition(objPosition);
         }
     }
     
