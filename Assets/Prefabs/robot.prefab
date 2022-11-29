@@ -121,6 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d576dfdbec1f4ae09435f1369b4189d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  smokeEffect: {fileID: 4184336885770209700}
   speed: 2.5
   vertical: 0
   maxMoveTime: 5
@@ -248,6 +249,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 47cd56e98675140cb81016cfd48e4279, type: 3}
+--- !u!198 &4184336885770209700 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8541885884778205120, guid: 47cd56e98675140cb81016cfd48e4279, type: 3}
+  m_PrefabInstance: {fileID: 5520040741969397348}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4184336885770209702 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8541885884778205122, guid: 47cd56e98675140cb81016cfd48e4279, type: 3}

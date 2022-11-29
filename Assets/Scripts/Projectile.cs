@@ -54,8 +54,8 @@ public class Projectile : MonoBehaviour
         var obj = col.collider.GetComponent<EnemyController>();
         if (obj != null)
         {
-            // obj.Fix();
-            Destroy(col.gameObject); // 销毁击中的目标    
+            obj.Fix();  // 修复机器人
+            // Destroy(col.gameObject); // 销毁击中的目标    
         }
     }
 }

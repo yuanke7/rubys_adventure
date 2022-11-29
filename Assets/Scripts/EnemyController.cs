@@ -8,6 +8,7 @@ using Random = System.Random;
 public class EnemyController : MonoBehaviour
 {
     // Start is called before the first frame update
+    public ParticleSystem smokeEffect;
     public float speed = 3.0f;
     public bool vertical = true;
     public float maxMoveTime = 5.0f;
@@ -124,6 +125,9 @@ public class EnemyController : MonoBehaviour
         // 让机器人不会被碰撞
         _rigidbody2D.simulated = false; // 刚体属性直接消除
         _animator.SetBool(Fixed, true);
+        // 删除烟雾效果
+        // Destroy(smokeEffect);
+        smokeEffect.Stop();  // 停止产生新的粒子  需要系统学习粒子系统 todo
     }
 
     public void FollowPlayer(Vector2 position)

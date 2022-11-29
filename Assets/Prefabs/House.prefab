@@ -121,9 +121,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4245992148435837594}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa1d89ee6baa94015a88fe137ab761a9, type: 3}
+  m_Script: {fileID: 11500000, guid: 9c851a87182d5a44ab3a8f050b090c6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawnInterval: 0.1
-  maxRobotNum: 2
+  enemySpawnInterval: 0.5
+  maxRobotNum: 100
   robot: {fileID: 4520837074058069954, guid: f4d9e8d18f4494fe38c0260b27086896, type: 3}
