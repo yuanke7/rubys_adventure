@@ -25,12 +25,24 @@ public class EnemyController : MonoBehaviour
     private Animator _animator;
     Random ran = new Random();
     private static readonly int Fixed = Animator.StringToHash("Fixed");
-
+    // sound
+    private AudioSource _audioSource;
+    public AudioClip hitRobot;
+    public AudioClip hitRobotStrong;
+    public AudioClip robotFixed;
+    public AudioClip robotWalk;
+    // health
+    public int maxHealth = 10;
+    private int _curHealth;
     private void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
         moveTimer = maxMoveTime;
+        _audioSource.clip = robotWalk;
+        _audioSource.Play();
+        _curHealth = maxHealth;
     }
 
     // Update is called once per frame
@@ -119,15 +131,32 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    private void StopSound()
+    {
+        // 停止播放行走声音
+        _audioSource.Stop();
+    }
+    
     public void Fix()
     {
-        broken = false;
-        // 让机器人不会被碰撞
-        _rigidbody2D.simulated = false; // 刚体属性直接消除
-        _animator.SetBool(Fixed, true);
-        // 删除烟雾效果
-        // Destroy(smokeEffect);
-        smokeEffect.Stop();  // 停止产生新的粒子  需要系统学习粒子系统 todo
+        if (_curHealth == 0)
+        {
+            _audioSource.PlayOneShot(robotFixed);
+            broken = false;
+            // 让机器人不会被碰撞
+            _rigidbody2D.simulated = false; // 刚体属性直接消除
+            _animator.SetBool(Fixed, true);
+            // 删除烟雾效果
+            // Destroy(smokeEffect);
+            smokeEffect.Stop();  // 停止产生新的粒子  需要系统学习粒子系统 todo
+            Invoke(nameof(StopSound), 1f); //延时方法  
+        }else
+        {
+            _audioSource.PlayOneShot(hitRobot);
+            _audioSource.PlayOneShot(hitRobotStrong);
+            _curHealth--;
+        }
+
     }
 
     public void FollowPlayer(Vector2 position)
