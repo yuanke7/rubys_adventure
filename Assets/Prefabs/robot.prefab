@@ -136,6 +136,7 @@ MonoBehaviour:
   hitRobotStrong: {fileID: 8300000, guid: 709a835b61b848644946696fdd5e5a4d, type: 3}
   robotFixed: {fileID: 8300000, guid: e7fa1971a86d60945bb64585c0ac14d5, type: 3}
   robotWalk: {fileID: 8300000, guid: 6bfbad8ffdf387d4e87e8fa07b62f7c1, type: 3}
+  maxHealth: 10
 --- !u!61 &8739273610195107643
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -175,7 +176,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 3
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
