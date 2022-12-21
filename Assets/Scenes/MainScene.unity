@@ -16573,6 +16573,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "\u9A6C\u5927\u59D0"
       objectReference: {fileID: 0}
+    - target: {fileID: 6945793967033284050, guid: 72376af7ae012454280bbff35b6297de, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 6945793967033284062, guid: 72376af7ae012454280bbff35b6297de, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -24453,7 +24457,7 @@ CompositeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
+  m_GeometryType: 1
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:
