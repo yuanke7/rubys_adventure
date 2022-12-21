@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6945793967033284049}
   - component: {fileID: 6945793967033284048}
   - component: {fileID: 6945793967033284051}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: "\u9A6C\u5927\u59D0"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,14 +122,14 @@ Rigidbody2D:
   m_GameObject: {fileID: 6945793967033284050}
   m_BodyType: 0
   m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
+  m_UseFullKinematicContacts: 1
+  m_UseAutoMass: 1
   m_Mass: 1
   m_LinearDrag: 3
   m_AngularDrag: 2
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 0
-  m_CollisionDetection: 1
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
   m_Constraints: 4
