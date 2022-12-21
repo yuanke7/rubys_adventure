@@ -132,6 +132,7 @@ MonoBehaviour:
   broken: 1
   attackArea: 100
   maxStuckedTime: 2
+  autoAttack: 1
   hitRobot: {fileID: 8300000, guid: ae904c7305df7344d86b2092c0cb3a26, type: 3}
   hitRobotStrong: {fileID: 8300000, guid: 709a835b61b848644946696fdd5e5a4d, type: 3}
   robotFixed: {fileID: 8300000, guid: e7fa1971a86d60945bb64585c0ac14d5, type: 3}
@@ -176,12 +177,12 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 1
+  m_LinearDrag: 0.5
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 0
+  m_SleepingMode: 2
   m_CollisionDetection: 0
   m_Constraints: 4
 --- !u!82 &-435002465086230036

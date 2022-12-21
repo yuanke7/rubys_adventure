@@ -23,6 +23,7 @@ public class EnemyController : MonoBehaviour
     private float _stuckedTimer; 
     private Rigidbody2D _rigidbody2D;
     private Animator _animator;
+    public bool autoAttack = false;
     Random ran = new Random();
     private static readonly int Fixed = Animator.StringToHash("Fixed");
     // sound
@@ -85,7 +86,7 @@ public class EnemyController : MonoBehaviour
         _stuckedPosition = position;
         
         // 跟随玩家
-        if (!_stucked)
+        if (!_stucked && autoAttack)
         {
             FollowPlayer(position);
         }

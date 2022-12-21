@@ -125,5 +125,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySpawnInterval: 2
-  maxRobotNum: 0
+  maxRobotNum: 10
   robot: {fileID: 4520837074058069954, guid: f4d9e8d18f4494fe38c0260b27086896, type: 3}

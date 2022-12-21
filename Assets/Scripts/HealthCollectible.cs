@@ -17,7 +17,7 @@ public class HealthCollectible : MonoBehaviour
             Debug.Log(controller.Health);
             if (controller.Health < controller.maxHealth)
             {
-                controller.ChangeHealth(1);  
+                controller.ChangeHealth(5);  
                 Destroy(gameObject);  // 销毁当前使用此脚本的对象   
                 controller.PlaySound(collectedClip, volume);
             }
