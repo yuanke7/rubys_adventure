@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4843846103155851137}
   m_Layer: 0
   m_Name: CollectibleHealth
-  m_TagString: Untagged
+  m_TagString: Strawberry
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collectedClip: {fileID: 8300000, guid: af5f8b64e3f58f24c87ff8f789b04f6c, type: 3}
+  volume: 1
 --- !u!61 &4843846103155851137
 BoxCollider2D:
   m_ObjectHideFlags: 0

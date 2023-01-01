@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class UiHealthBar : MonoBehaviour
 {
-    // 血条对象 其他对象能获取但不能更改  设置为静态表示单例
+    // 血条对象 其他对象能获取但不能更改  设置为静态表示被所有实例共享
     public static UiHealthBar Instance { get; private set; }
 
     public Image mask;

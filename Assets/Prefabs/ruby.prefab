@@ -105,9 +105,11 @@ MonoBehaviour:
   maxHealth: 10
   invincible: 0
   maxInvincibleTime: 1
-  maxLaunchInterval: 0.1
+  lookDirection: {x: 0, y: 0}
+  maxLaunchInterval: 0.06
   projectilePrefab: {fileID: 6114480537547436798, guid: 8d6db3b19298a49688f571c27a8c4650, type: 3}
-  launchSound: {fileID: 8300000, guid: b2edfd40873655249ba0e01a5cf705be, type: 3}
+  bulletSpeed: 20
+  launchSound: {fileID: 8300000, guid: d7caae79220e445f28a902c5b7e9a49a, type: 3}
   hurtSound: {fileID: 8300000, guid: 8cc844c8431b343128add2af9b127484, type: 3}
   runSound: {fileID: 8300000, guid: a20c77ecd5de9eb4a98731b45ad84c3e, type: 3}
   strawBerrySound: {fileID: 8300000, guid: 477d49298fa15432b8a33e275fa7082d, type: 3}

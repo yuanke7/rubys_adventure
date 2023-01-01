@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Random = System.Random;
@@ -32,6 +33,7 @@ public class EnemyController : MonoBehaviour
     public AudioClip hitRobotStrong;
     public AudioClip robotFixed;
     public AudioClip robotWalk;
+    private AudioClip[] _audioClipsOptions = new AudioClip[2];
     // health
     public int maxHealth = 10;
     private int _curHealth;
@@ -44,6 +46,9 @@ public class EnemyController : MonoBehaviour
         _audioSource.clip = robotWalk;
         _audioSource.Play();
         _curHealth = maxHealth;
+        _audioClipsOptions[0] = hitRobot;
+        _audioClipsOptions[1] = hitRobotStrong;
+        // Debug.Log(_audioClipsOptions);
     }
 
     // Update is called once per frame
@@ -68,7 +73,7 @@ public class EnemyController : MonoBehaviour
             if (_stuckedPosition.normalized == position.normalized)
             {   // direction
                 // up [true 1]   down [true -1]   left [false -1]  right [false 1] 
-                Debug.Log($"{position.normalized} {_stuckedPosition.normalized}");
+                // Debug.Log($"{position.normalized} {_stuckedPosition.normalized}");
                 vertical = !vertical;
                 _stucked = true;
                 _stuckedTimer = maxStuckedTime;
@@ -150,11 +155,14 @@ public class EnemyController : MonoBehaviour
             // 删除烟雾效果
             // Destroy(smokeEffect);
             smokeEffect.Stop();  // 停止产生新的粒子  需要系统学习粒子系统 todo
+            Destroy(gameObject);
             Invoke(nameof(StopSound), 1f); //延时方法  
         }else
         {
-            _audioSource.PlayOneShot(hitRobot);
-            _audioSource.PlayOneShot(hitRobotStrong);
+            Random rnd = new Random();
+            int index = rnd.Next(_audioClipsOptions.Length);
+            // Debug.Log(index);
+            _audioSource.PlayOneShot(_audioClipsOptions[index]);
             _curHealth--;
         }
 

@@ -124,6 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa1d89ee6baa94015a88fe137ab761a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawnInterval: 2
-  maxRobotNum: 10
+  enemySpawnInterval: 1
+  maxRobotNum: 100
+  maxAliveNum: 20
   robot: {fileID: 4520837074058069954, guid: f4d9e8d18f4494fe38c0260b27086896, type: 3}

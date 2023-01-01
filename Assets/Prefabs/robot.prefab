@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -435002465086230036}
   m_Layer: 10
   m_Name: robot
-  m_TagString: Untagged
+  m_TagString: Robot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -123,9 +123,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   smokeEffect: {fileID: 4184336885770209700}
-  speed: 2.5
+  speed: 3
   vertical: 0
-  maxMoveTime: 5
+  maxMoveTime: 2
   moveTimer: 0
   direction: -1
   damageToPlayer: 1
@@ -197,7 +197,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -286,12 +286,11 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    serializedVersion: 2
     m_TransformParent: {fileID: 4520837074058069956}
     m_Modifications:
     - target: {fileID: 8541885884778205122, guid: 47cd56e98675140cb81016cfd48e4279, type: 3}
       propertyPath: m_RootOrder
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8541885884778205122, guid: 47cd56e98675140cb81016cfd48e4279, type: 3}
       propertyPath: m_LocalScale.x
@@ -349,8 +348,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: smokeEffect
       objectReference: {fileID: 0}
+    - target: {fileID: 8541885884778205149, guid: 47cd56e98675140cb81016cfd48e4279, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 47cd56e98675140cb81016cfd48e4279, type: 3}
 --- !u!198 &4184336885770209700 stripped
 ParticleSystem:

@@ -10,11 +10,11 @@ public class HealthCollectible : MonoBehaviour
     public float volume=1.0f;
     private void OnTriggerEnter2D(Collider2D obj)
     {
-        Debug.Log($"Object <{obj.name}> has enter the HealthCollectible area.");
+        // Debug.Log($"Object <{obj.name}> has enter the HealthCollectible area.");
         var controller = obj.GetComponent<RubyController>();
         if (controller != null)
         {
-            Debug.Log(controller.Health);
+            // Debug.Log(controller.Health);
             if (controller.Health < controller.maxHealth)
             {
                 controller.ChangeHealth(5);  
